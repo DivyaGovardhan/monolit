@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+
+    {% block title %}<title>Новый Дизайн</title>{% endblock %}
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+</head>
+
+<body>
+<div class="container mt-5">
+    <header class="text-center mb-4">
+        <h1 class="display-4">Добро пожаловать в Наш Сервис!</h1>
+        <p class="lead">Ваше мнение имеет значение!</p>
+    </header>
+
+    <div class="row">
+        <nav class="col-md-3">
+            {% block sidebar %}
+                <div class="list-group">
+                    <a href="{% url 'polls:index' %}" class="list-group-item list-group-item-action">Главная</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'polls:create_poll' %}" class="list-group-item list-group-item-action">Создать опрос</a>
+                    {% else %}
+                        <a href="{% url 'polls:login' %}" class="list-group-item list-group-item-action">Войти</a>
+                        <a href="{% url 'polls:register' %}" class="list-group-item list-group-item-action">Регистрация</a>
+                    {% endif %}
+                </div>
+            {% endblock %}
+        </nav>
+
+        <main class="col-md-6">
+            {% block content %}
+            <div class="card">
+                <div class="card-body">
+                    <form action="{% url 'polls:vote' question.id %}" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend class="h4">{{question.short_desc}}</legend>
+                            <h5 class="text-muted">{{question.question_text}}</h5>
+                            {% if question.image %}
+                                <img src="{{ question.image.url }}" alt="{{ question.image.title }}" class="img-fluid mt-3 mb-3"/>
+                            {% endif %}
+                            {% if error_message %}<p class="text-danger">{{error_message}}</p>{% endif %}
+                            {% for choice in question.choice_set.all %}
+                                <div class="form-check">
+                                    <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}" class="form-check-input">
+                                    <label for="choice{{forloop.counter}}" class="form-check-label">{{choice.choice_text}}</label>
+                                </div>
+                            {% endfor %}
+                        </fieldset>
+                        <button type="submit" class="btn btn-success mt-3">Голосовать</button>
+                    </form>
+                </div>
+            </div>
+            {% endblock %}
+        </main>
+
+        <aside class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Профиль</h5>
+                    {% if user.is_authenticated %}
+                        <div class="text-center">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" alt="{{ user.avatar.title }}" class="img-fluid rounded-circle" style="width: 70px; height: 70px;"/>
+                            {% else %}
+                                <div class="bg-light rounded-circle" style="width: 70px; height: 70px;"></div>
+                            {% endif %}
+                            <p class="mt-2">Аккаунт: <strong>{{ user }}</strong></p>
+                        </div>
+                        <a href="{% url 'polls:profile' %}" class="btn btn-primary btn-block">Перейти в профиль</a>
+                        <a href="{% url 'polls:logout' %}" class="btn btn-danger btn-block">Выйти</a>
+                    {% else %}
+                        <a href="{% url 'polls:login' %}" class="btn btn-success btn-block">Войти</a>
+                        <a href="{% url 'polls:register' %}" class="btn btn-secondary btn-block">Регистрация</a>
+                    {% endif %}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+</body>
+</html>

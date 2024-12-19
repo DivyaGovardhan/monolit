@@ -1,0 +1,12 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+
+<h3>Регистрация</h3>
+<form method="post" autocomplete="off" novalidate enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary font-weight-bold">Зарегистрироваться</button>
+</form>
+
+{% endblock %}

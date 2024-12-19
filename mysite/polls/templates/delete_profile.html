@@ -1,0 +1,11 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+
+    <h3>Удаление профиля</h3>
+    <form method="post" novalidate class="mt-1">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        <a href="{% url 'polls:profile' %}" class="btn btn-primary">Отмена</a>
+    </form>
+{% endblock %}

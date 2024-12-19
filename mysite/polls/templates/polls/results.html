@@ -1,0 +1,22 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+
+<h1>{{question.short_desc}}</h1>
+<h4 class="text-secondary mb-3">{{question.question_text}}</h4>
+{% if question.image %}
+    <img src="{{ question.image.url }}" alt="{{ question.image.title }}" class="image-question mt-3 mb-3"/>
+{% endif %}
+<h3 class="">Голосов: {{ question.total_votes }}</h3>
+<table class="mb-3 mt-3">
+    {% for choice in question.choice_set.all %}
+    <tr>
+        <td class="p-1">{{ choice.choice_text }}</td>
+        <td class="p-1">{{ choice.get_percent }}%</td>
+        <td class="p-1">({{ choice.votes }})</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'polls:index' %}" class="btn btn-primary">На главную</a>
+
+{% endblock %}

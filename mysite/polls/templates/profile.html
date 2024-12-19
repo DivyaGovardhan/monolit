@@ -1,0 +1,15 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+
+    <h3>Профиль</h3>
+    <p class="h4 text-secondary">{{ user.username }}</p>
+    {% if user.avatar %}
+        <img src="{{ user.avatar.url }}" alt="{{ user.avatar.title }}" class="avatar-profile mt-3 mb-2"/>
+    {% else %}
+        <div class="avatar-profile-blank mt-3 mb-2"></div>
+    {% endif %}
+    <p>{{ user.email }}</p>
+    <a href="{% url 'polls:edit-profile' %}" class="btn btn-primary">Изменить данные</a>
+    <a href="{% url 'polls:delete-profile' %}" class="btn btn-danger">Удалить профиль</a>
+{% endblock %}

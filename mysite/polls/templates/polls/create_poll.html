@@ -1,0 +1,33 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Создать новый опрос</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+
+        <h4>Варианты ответов</h4>
+        {{ formset.management_form }}
+        <div id="choices">
+            {% for form in formset %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" id="add-choice" class="btn btn-secondary">Добавить вариант</button>
+        <button type="submit" class="btn btn-success mt-3">Создать опрос</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('add-choice').addEventListener('click', function() {
+    var choiceCount = document.querySelectorAll('#choices .form-group').length;
+    var newChoice = document.querySelector('#choices .form-group').cloneNode(true);
+    newChoice.querySelector('input').value = ''; // Очистить значение
+    newChoice.querySelector('label').innerText = 'Вариант ответа ' + (choiceCount + 1);
+    document.getElementById('choices').appendChild(newChoice);
+});
+</script>
+{% endblock %}

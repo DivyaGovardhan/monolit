@@ -1,0 +1,141 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.sidebar-nav {
+    padding: 0;
+}
+
+.sidebar-nav > li {
+    list-style-type: none;
+    margin: 10px 0;
+}
+
+form > p {
+    margin: 10px 0;
+}
+
+form > p > input,
+form > p > select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    background-color: #f1f1f1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.errorlist {
+    color: #ff5732;
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+p:has(#id_consent) {
+    display: flex;
+    align-items: center;
+}
+
+label[for="id_consent"] {
+    margin-bottom: 0;
+    margin-right: 5px;
+}
+
+#id_consent {
+    width: 20px;
+    height: 20px;
+}
+
+.avatar-index,
+.avatar-profile {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-index {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.avatar-profile {
+    width: 70px;
+    height: 70px;
+}
+
+.avatar-index-blank,
+.avatar-profile-blank {
+    background-color: #D1D1D1;
+    border-radius: 50%;
+}
+
+li:has(.question-index) {
+    list-style: none;
+}
+
+.question-index {
+    display: block;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.question-index:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+}
+
+.image-question {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+}
+
+header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.list-group-item {
+    transition: background-color 0.3s;
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+.card {
+    margin-top: 20px;
+    border: none;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
